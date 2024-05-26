@@ -30,18 +30,16 @@ test('The response code for updating the kit should be 200', async () => {
 			},
 			body: JSON.stringify(requestBodyCreate)
 		});
-
-		const actualStatus = responsePost.status;
-		expect(actualStatus).toBe(201);
-		const data = await responsePost.json();
-
-		//console.log(data);
-		id = data["id"];
-		
-		
+		actualStatus = await responsePost.status;	
+		data = await responsePost.json();
 	} catch (error) {
 		console.error(error);
 	}
+
+	expect(actualStatus).toBe(201);
+	
+	//console.log(data);
+	id = data["id"];
 
 	//This block alters the kit which was prevously created
 	//Checking if the status code is 200.
@@ -52,18 +50,21 @@ test('The response code for updating the kit should be 200', async () => {
 			'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(requestBodyUpdate)
+			
 		});
-	const actualPutStatus = responsePut.status;
+		actualPutStatus = await responsePut.status;
+		updatedData = await responsePut.json();
 
-	//Assert that status is 200
-	expect(actualPutStatus).toBe(200);
-	const updatedData = await responsePut.json();
-	//console.log(updatedData)
+		
 		
 	} catch (error) {
 		console.error(error);
 	}
 
+	//Assert that status is 200
+	expect(actualPutStatus).toBe(200);
+		
+	//console.log(updatedData)
 });
 
 test('The response when updating a kit should contain expected data', async () => {
@@ -81,17 +82,19 @@ test('The response when updating a kit should contain expected data', async () =
 			body: JSON.stringify(requestBodyCreate)
 		});
 
-		const actualStatus = responsePost.status;
-		expect(actualStatus).toBe(201);
-		const data = await responsePost.json();
+		actualStatus = await responsePost.status;
+		data = await responsePost.json();
 
-		//console.log(data);
-		id = data["id"];
-		
-		
 	} catch (error) {
 		console.error(error);
 	}
+	actualStatus = await responsePost.status;
+	expect(actualStatus).toBe(201);
+	
+
+	//console.log(data);
+	id = data["id"];
+	
 
 	//This block alters the kit which was prevously created
 	//Checking if the response message is correct.
@@ -104,14 +107,16 @@ test('The response when updating a kit should contain expected data', async () =
 			body: JSON.stringify(requestBodyUpdate)
 		});
 	
-		const updatedData = await responsePut.json();
-		let ok = updatedData["ok"];
-		
-		// Assert that the "ok" value is true, meaning the kit was deleted
-		expect(ok).toBe(true)
+		updatedData = await responsePut.json();
+	
 		
 	} catch (error) {
 		console.error(error);
 	}
+
+	let ok = updatedData["ok"];
+		
+	// Assert that the "ok" value is true, meaning the kit was deleted
+	expect(ok).toBe(true)
 
 });

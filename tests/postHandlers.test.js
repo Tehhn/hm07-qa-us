@@ -15,13 +15,14 @@ test('Creating a Kit should return status 201 created', async () => {
 			},
 			body: JSON.stringify(requestBody)
 		});
-		const actualStatus = response.status;
-		expect(actualStatus).toBe(201);
+		actualStatus = response.status;
+		
 		
 	} catch (error) {
 		console.error(error);
 	}
 
+	expect(actualStatus).toBe(201);
 	
 });
 
@@ -34,14 +35,14 @@ test('Response when creating a kit should provide correct data back', async () =
 			},
 			body: JSON.stringify(requestBody)
 		});
-		
+		data = await response.json();
 		
 	} catch (error) {
 		console.error(error);
 	}
 	
 
-	const data = await response.json();
+	
 	const name = data["name"];
 	const id = data["id"];
 	const cardId = data["card"]["id"];
