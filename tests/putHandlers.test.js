@@ -88,7 +88,7 @@ test('The response when updating a kit should contain expected data', async () =
 	} catch (error) {
 		console.error(error);
 	}
-	actualStatus = await responsePost.status;
+	
 	expect(actualStatus).toBe(201);
 	
 
