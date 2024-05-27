@@ -91,13 +91,13 @@ test('Response for Deleting a kit should provide correct data back ', async () =
 		data = await responseDelete.json();
 		ok = data["ok"];
 		
-		//This is a check that the response body of the DELETE method returns 
-		//correct data.
-		expect(ok).toBe(true);
 		
 	} catch (error) {
 		console.error(error);
 	}
 	
+	//This is a check that the response body of the DELETE method returns 
+		//correct data.
+		expect(ok).toBe(true);
 });
 
